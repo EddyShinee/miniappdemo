@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <script src="https://scdn.zalopay.com.vn/zst/zpi-spa/sdk/0.1.0/sdk.js"></script>
+
 </head>
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="72">
@@ -147,6 +149,9 @@
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/freelancer.js"></script>
+    <script>
+        window.ZLP.init(2553, "sandboxmc").then(result => { console.log(result) }).catch(e => console.error(e))
+    </script>
 </body>
 
 </html>
