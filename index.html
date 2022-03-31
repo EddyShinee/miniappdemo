@@ -167,23 +167,19 @@
     <script>
         window.ZLP.init(2553, "sandboxmc").then(result => {
             console.log(result);
-                document.getElementById("init_result").innerHTML = JSON.stringify(result);;
+                document.getElementById("init_result").innerHTML = JSON.stringify(result);
+                window.ZLP.User().getUserInfo().then( data => {
+                console.log( data );
+                document.getElementById( "user_result" ).innerHTML = JSON.stringify( data );
+            } ).catch( e => {
+                console.log( e )
+                document.getElementById( "user_result" ).innerHTML = JSON.stringify( e );
+            } );
         }).catch(e => {
             console.error(e)
             document.getElementById("init_result").innerHTML = JSON.stringify(e);
         }
         )
-        console.log( "data" );
-        window.ZLP.User().getUserInfo().then(data => {
-            console.log(data);
-            document.getElementById("user_result").innerHTML = JSON.stringify(data);
-
-        }).catch( e => {
-            console.error(e)
-            document.getElementById("user_result").innerHTML = JSON.stringify(e);
-        }
-        )
-
         document.getElementById("result").innerHTML = "OK";
 
     </script>
