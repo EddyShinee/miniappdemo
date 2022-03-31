@@ -171,7 +171,7 @@
         }
         )
 
-        window.ZLP.User().UserInfo().then(result => {
+        window.ZLP.User().getUserInfo().then(result => {
             console.log(result);
             document.getElementById( "user_result" ).innerHTML = JSON.stringify( result );
 
