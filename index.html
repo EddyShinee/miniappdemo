@@ -147,10 +147,42 @@
             </div>
         </div>
     </div>
+    <div>
+        <h4>
+            Thông tin AppID: 2553
+        </h4>
+        <p>==========Thông tin Init:============</p>
+        <div class="" id="init_result"></div>
+
+        <p>==========Thông tin Get User:============</p>
+        <div class="" id="user_result"></div>
+    </div>
+    <script>
+    </script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/freelancer.js"></script>
     <script>
-        window.ZLP.init(2553, "sandboxmc").then(result => { console.log(result) }).catch(e => console.error(e))
+        window.ZLP.init(2553, "sandboxmc").then(result => {
+            console.log(result);
+                document.getElementById("init_result").innerHTML = result;
+        }).catch(e => {
+            console.error( e )
+            document.getElementById("init_result").innerHTML = e;
+        }
+        )
+
+        window.ZLP.User().UserInfo().then(result => {
+            console.log(result);
+            document.getElementById( "user_result" ).innerHTML = result;
+
+        }).catch( e => {
+            console.error( e )
+            document.getElementById( "user_result" ).innerHTML = e;
+        }
+        )
+
+        window.ZLP.Tracking().trackEvent( '5Q02.000', { meta: "example" } ).then( ( resp ) => { console.log( resp ); } ).catch( err => { console.log( err ); } )
+
     </script>
 </body>
 
