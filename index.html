@@ -86,7 +86,7 @@
                 var copyText = document.getElementsByClassName( "dataCopy" );
                 copyText[0].select();
                 copyText[0].setSelectionRange( 0, 99999 ); /* For mobile devices */
-                navigator.clipboard.writeText( copyText.value );
+                navigator.clipboard.writeText( copyText[0].value );
                 $( '.alert' ).show();
                 setTimeout( function () {
                 $( '.alert' ).hide();
