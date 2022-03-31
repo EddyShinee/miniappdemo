@@ -171,17 +171,15 @@
         }
         )
 
-        window.ZLP.User().getUserInfo().then(result => {
-            console.log(result);
-            document.getElementById( "user_result" ).innerHTML = JSON.stringify( result );
+        window.ZLP.User().getUserInfo().then(data => {
+            console.log( data );
+            document.getElementById( "user_result" ).innerHTML = JSON.stringify( data );
 
         }).catch( e => {
             console.error( e )
             document.getElementById( "user_result" ).innerHTML = JSON.stringify( e );
         }
         )
-
-        window.ZLP.Tracking().trackEvent( '5Q02.000', { meta: "example" } ).then( ( resp ) => { console.log( resp ); } ).catch( err => { console.log( err ); } )
 
     </script>
 </body>
