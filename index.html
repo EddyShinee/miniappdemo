@@ -156,6 +156,9 @@
 
         <p>==========Thông tin Get User:============</p>
         <div class="" id="user_result"></div>
+
+        <p>==========Check:============</p>
+        <div class="" id="result"></div>
     </div>
     <script>
     </script>
@@ -170,7 +173,7 @@
             document.getElementById("init_result").innerHTML = JSON.stringify(e);
         }
         )
-    console.log( "data" );
+        console.log( "data" );
         window.ZLP.User().getUserInfo().then(data => {
             console.log(data);
             document.getElementById("user_result").innerHTML = JSON.stringify(data);
@@ -180,6 +183,8 @@
             document.getElementById("user_result").innerHTML = JSON.stringify(e);
         }
         )
+
+        document.getElementById("result").innerHTML = "OK";
 
     </script>
 </body>
