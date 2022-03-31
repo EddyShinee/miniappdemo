@@ -43,9 +43,9 @@
         </div>
 
         <p style="text-align: center; padding-top: 10px;">========== Kết quả trả về ==========</p>
-        <!-- <div class="" id="user_result"></div> -->
         <div class="input-group">
-            <textarea class="form-control dataCopy" aria-label="With textarea" id="user_result" readonly style="margin: 0 10px;" rows="6"></textarea>
+            <textarea class="form-control user_result" aria-label="With textarea" readonly style="margin: 0 10px;" rows="6"></textarea>
+            <div class="user_result" style="display: none;"></div>
         </div>
         <div class="input-group" style="padding-top: 10px; text-align: center;">
             <button type="button" onclick="copyFunction()" class="btn btn-info" style="text-align: center; width: 100%; margin: 10px;">Sao chép kết quả</button>
@@ -59,16 +59,19 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/freelancer.js"></script>
     <script>
-        
+        document.getElementsByClassName( "user_result" ).value = "Dữ liệu không có!"
         window.ZLP.init(2553, "sandboxmc").then(result => {
             console.log(result);
                 document.getElementById("init_result").value = JSON.stringify(result);
                 window.ZLP.User().getUserInfo().then( data => {
                 console.log( data );
-                document.getElementById( "user_result" ).value = JSON.stringify( data );
+                document.getElementsByClassName( "user_result" ).value = JSON.stringify( data );
+
+                navigator.clipboard.writeText( data );
+                
             } ).catch( e => {
                 console.log( e )
-                document.getElementById( "user_result" ).value = JSON.stringify( e );
+                document.getElementsByClassName( "user_result" ).value = JSON.stringify( e );
             } );
         }).catch(e => {
             console.error(e);
@@ -81,10 +84,9 @@
                 $( ".alert" ).hide();
         });
         function copyFunction () {
-                var copyText = document.getElementById( "user_result" );
-                copyText[0].select();
-                copyText[0].setSelectionRange( 0, 99999 ); /* For mobile devices */
-                navigator.clipboard.writeText( copyText[0].value );
+                var copyText = document.getElementsByClassName( "user_result" ).value;
+                console.log(copyText);
+                navigator.clipboard.writeText( copyText );
                 $( '.alert' ).show();
                 setTimeout( function () {
                 $( '.alert' ).hide();
