@@ -84,9 +84,15 @@
                 document.getElementById( "user_info" ).value = JSON.stringify( e );
             } );
 
-                window.ZLP.Device().Location().then(location => {
-                    document.getElementById( "user_location" ).value = JSON.stringify( location );
-                });
+
+            window.ZLP.Device().Location().then( location => {
+                document.getElementById( "user_location" ).value = JSON.stringify( location );
+            }).catch( e => {
+                console.log( e )
+                document.getElementById( "user_location" ).value = JSON.stringify( e );
+            } );
+
+
         }).catch(e => {
             console.error(e);
             document.getElementById("init_result").value = JSON.stringify(e);
