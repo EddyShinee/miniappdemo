@@ -47,6 +47,16 @@
             <textarea class="form-control user_result" aria-label="With textarea" id="user_info" readonly style="margin: 0 10px;" rows="6"></textarea>
             <div id="user_result" style="display: none;"></div>
         </div>
+
+        <p style="text-align: center; padding-top: 10px;">========== Kết quả Location ==========</p>
+        <div class="input-group">
+            <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly
+                style="margin: 0 10px;" rows="6"></textarea>
+            <div id="user_result" style="display: none;"></div>
+        </div>
+
+
+
         <div class="input-group" style="padding-top: 10px; text-align: center;">
             <!-- <button type="button" onclick="copyFunction()" class="btn btn-info" style="text-align: center; width: 100%; margin: 10px;">Sao chép kết quả</button> -->
         </div>
@@ -68,11 +78,15 @@
                 console.log( data );
                 document.getElementById( "user_info" ).value = JSON.stringify( data );
                 document.getElementById( "user_result" ).value = JSON.stringify( data );
-                
+
             } ).catch( e => {
                 console.log( e )
                 document.getElementById( "user_info" ).value = JSON.stringify( e );
             } );
+
+                window.ZLP.Device().Location().then(location => {
+                    document.getElementById( "user_location" ).value = JSON.stringify( location );
+                });
         }).catch(e => {
             console.error(e);
             document.getElementById("init_result").value = JSON.stringify(e);
@@ -91,7 +105,7 @@
                 setTimeout( function () {
                 $( '.alert' ).hide();
                 }, 1000 );
-            
+
             }
     </script>
 </body>
