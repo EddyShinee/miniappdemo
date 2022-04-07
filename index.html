@@ -81,7 +81,7 @@
             } );
 
 
-            window.ZLP.Device().getCurLocation().then( location => {
+            window.ZLP.Location().getCurLocation().then( location => {
                 document.getElementById( "user_location" ).value = JSON.stringify( location );
             }).catch( e => {
                 console.log( e )
