@@ -50,8 +50,7 @@
 
         <p style="text-align: center; padding-top: 10px;">========== Kết quả Location ==========</p>
         <div class="input-group">
-            <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly
-                style="margin: 0 10px;" rows="6"></textarea>
+            <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly style="margin: 0 10px;" rows="6"></textarea>
             <div id="user_result" style="display: none;"></div>
         </div>
 
@@ -85,12 +84,12 @@
             } );
 
 
-            window.ZLP.Device().Location().then( location => {
-                document.getElementById( "user_location" ).value = JSON.stringify( location );
-            }).catch( e => {
-                console.log( e )
-                document.getElementById( "user_location" ).value = JSON.stringify( e );
-            } );
+            // window.ZLP.Device().Location().then( location => {
+            //     document.getElementById( "user_location" ).value = JSON.stringify( location );
+            // }).catch( e => {
+            //     console.log( e )
+            //     document.getElementById( "user_location" ).value = JSON.stringify( e );
+            // } );
 
 
         }).catch(e => {
