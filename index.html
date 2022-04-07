@@ -74,7 +74,6 @@
                 window.ZLP.User().getUserInfo().then( data => {
                 console.log( data );
                 document.getElementById( "user_info" ).value = JSON.stringify( data );
-                document.getElementById( "user_result" ).value = JSON.stringify( data );
 
             } ).catch( e => {
                 console.log( e )
