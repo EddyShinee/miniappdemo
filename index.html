@@ -50,9 +50,20 @@
         <p style="text-align: center; padding-top: 10px;">========== Kết quả Location ==========</p>
         <div class="input-group">
             <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly style="margin: 0 10px;" rows="6"></textarea>
-            <textarea class="form-control user_proxy_location" aria-label="With textarea" id="user_proxy_location" readonly style="margin: 0 10px;" rows="6"></textarea>
+            <textarea class="form-control display_name" aria-label="With textarea" id="display_name" readonly style="margin: 0 10px;" rows="6"></textarea>
         </div>
 
+        <p style="text-align: center; padding-top: 10px;">========== Kết quả DisplayName ==========</p>
+        <div class="input-group">
+            <textarea class="form-control display_name" aria-label="With textarea" id="display_name" readonly
+                style="margin: 0 10px;" rows="6"></textarea>
+        </div>
+
+        <p style="text-align: center; padding-top: 10px;">========== Kết quả Phone Number ==========</p>
+        <div class="input-group">
+            <textarea class="form-control phone_number" aria-label="With textarea" id="phone_number" readonly
+                style="margin: 0 10px;" rows="6"></textarea>
+        </div>
 
 
         <div class="input-group" style="padding-top: 10px; text-align: center;">
@@ -68,7 +79,7 @@
     <script src="assets/js/freelancer.js"></script>
     <script>
         // document.getElementById( "user_result" ).value = "Dữ liệu không có!"
-        window.ZLP.init(1721, "sandboxmc").then(result => {
+        window.ZLP.init(2553, "sandboxmc").then(result => {
             console.log(result);
                 document.getElementById("init_result").value = JSON.stringify(result);
 
