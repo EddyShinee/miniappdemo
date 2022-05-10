@@ -12,7 +12,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <!--Begin nhúng SDK của ZaloPay-->
-    <script src="https://scdn.zalopay.com.vn/zst/zpi-spa/sdk/0.1.0/sdk.js"></script>
+    <script src="https://sjs.zalopay.com.vn/mini-app/sdk/1.0.1/sdk.js"></script>
     <!--End nhúng SDK của ZaloPay-->
 
 
@@ -81,15 +81,15 @@
         // document.getElementById( "user_result" ).value = "Dữ liệu không có!"
         window.ZLP.init(1721, "sandboxmc").then(result => {
             console.log(result);
-                document.getElementById("init_result").value = JSON.stringify(result);
+                document.getElementById("init_result").value = JSON.stringify(result, null, 4);
 
                 window.ZLP.User().getUserInfo().then( data => {
                 console.log( data );
-                document.getElementById( "user_info" ).value = JSON.stringify( data );
+                document.getElementById( "user_info" ).value = JSON.stringify( data, null, 4 );
 
             } ).catch( e => {
                 console.log( e )
-                document.getElementById( "user_info" ).value = JSON.stringify( e );
+                document.getElementById( "user_info" ).value = JSON.stringify( e , null, 4);
             } );
 
 
