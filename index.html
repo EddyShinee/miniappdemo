@@ -69,6 +69,7 @@
         <div class="input-group" style="padding-top: 10px; text-align: center;">
             <!-- <button type="button" onclick="copyFunction()" class="btn btn-info" style="text-align: center; width: 100%; margin: 10px;">Sao chép kết quả</button> -->
         </div>
+         <button type="button" onclick="callDeepLinkFunction()" class="btn btn-info" style="text-align: center; width: 100%; margin: 10px;">Call Deep Link</button>
     </div>
     <div>
     </div>
@@ -120,6 +121,18 @@
                 setTimeout( function () {
                 $( '.alert' ).hide();
                 }, 1000 );
+
+            }
+              function callDeepLinkFunction () {
+                window.ZLP.UI().launchDeepLinkParams({zpa: "zalopay://launch/app/730?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"},{zpi: ""}).then( location => {
+
+                      // Your code here
+                    //   document.getElementById( "user_location" ).value = JSON.stringify( location );
+                  } ).catch( e => {
+                      console.log( e )
+                      // Your code here
+                    //   document.getElementById( "user_location" ).value = JSON.stringify( e );
+                  } );
 
             }
     </script>
