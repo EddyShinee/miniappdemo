@@ -103,16 +103,6 @@
                 document.getElementById( "user_location" ).value = JSON.stringify( e );
             } );
 
-              window.ZLP.UI().launchDeepLinkParams( { zpa: "zalopay://launch/app/730?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM" }, { zpi: "" } ).then( location => {
-
-                // Your code here
-                //   document.getElementById( "user_location" ).value = JSON.stringify( location );
-            } ).catch( e => {
-                console.log( e )
-                // Your code here
-                //   document.getElementById( "user_location" ).value = JSON.stringify( e );
-            } );
-
         }).catch(e => {
             console.log(e);
             document.getElementById("init_result").value = JSON.stringify(e);
@@ -123,6 +113,11 @@
         $( document ).ready( function () {
                 $( ".alert" ).hide();
         });
+
+             function callDeepLinkFunction () {
+                 alert("ok");
+                    window.location.href = "zalopay://launch/app/730?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"
+                }
         function copyFunction () {
                 var copyText = document.getElementById( "user_result" ).value;
                 console.log(copyText);
@@ -133,9 +128,7 @@
                 }, 1000 );
 
             }
-              function callDeepLinkFunction () {
-               window.location.href ="zalopay://launch/app/730?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"
-            }
+
     </script>
 </body>
 
