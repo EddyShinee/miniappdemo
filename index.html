@@ -134,16 +134,7 @@
 
             }
               function callDeepLinkFunction () {
-                window.ZLP.UI().launchDeepLinkParams({zpa: "zalopay://launch/app/730?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"},{zpi: ""}).then( location => {
-
-                      // Your code here
-                    //   document.getElementById( "user_location" ).value = JSON.stringify( location );
-                  } ).catch( e => {
-                      console.log( e )
-                      // Your code here
-                    //   document.getElementById( "user_location" ).value = JSON.stringify( e );
-                  } );
-
+               window.location.href ="zalopay://launch/app/730?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"
             }
     </script>
 </body>
