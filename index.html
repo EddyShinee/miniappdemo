@@ -239,12 +239,12 @@
                         if ( data.return_code == 1 ) {
                             $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
                         } else {
-                            $( '##create-order-result' ).val( JSON.stringify( data, null, 4 ) );
+                            $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
                         }
 
             } )
             .fail( function ( err ) {
-                $( '##create-order-result' ).val( JSON.stringify( err.responseText, null, 4 ) );
+                $( '#create-order-result' ).val( JSON.stringify( err.responseText, null, 4 ) );
                 console.log( JSON.stringify( err, null, 4 ) )
             } );
     } );
