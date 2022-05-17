@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
     <!--Begin nhúng SDK của ZaloPay-->
     <script src="https://sjs.zalopay.com.vn/mini-app/sdk/1.0.1/sdk.js"></script>
@@ -37,39 +38,35 @@
         <h4 style="text-align: center; padding-top: 10px;">
             Thông tin AppID: 1721
         </h4>
-        <p style="text-align: center;">========== Kết quả Init ==========</p>
+        <p style="text-align: center;">========== Init in ZaloPay ==========</p>
         <div class="input-group">
             <textarea class="form-control" readonly style="margin: 0 10px;" rows="4" id="init_result"></textarea>
         </div>
 
-        <p style="text-align: center; padding-top: 10px;">========== Kết quả trả về ==========</p>
+        <p style="text-align: center; padding-top: 10px;">========== Result ==========</p>
         <div class="input-group">
             <textarea class="form-control user_result" aria-label="With textarea" id="user_info" readonly style="margin: 0 10px;" rows="6"></textarea>
         </div>
 
-        <p style="text-align: center; padding-top: 10px;">========== Kết quả Location ==========</p>
+        <p style="text-align: center; padding-top: 10px;">========== Get Location (Lt, Lg) ==========</p>
         <div class="input-group">
             <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly style="margin: 0 10px;" rows="6"></textarea>
-            <textarea class="form-control display_name" aria-label="With textarea" id="display_name" readonly style="margin: 0 10px;" rows="6"></textarea>
         </div>
-
-        <p style="text-align: center; padding-top: 10px;">========== Kết quả DisplayName ==========</p>
-        <div class="input-group">
-            <textarea class="form-control display_name" aria-label="With textarea" id="display_name" readonly
-                style="margin: 0 10px;" rows="6"></textarea>
-        </div>
-
-        <p style="text-align: center; padding-top: 10px;">========== Kết quả Phone Number ==========</p>
-        <div class="input-group">
-            <textarea class="form-control phone_number" aria-label="With textarea" id="phone_number" readonly
-                style="margin: 0 10px;" rows="6"></textarea>
-        </div>
-
 
         <div class="input-group" style="padding-top: 10px; text-align: center;">
             <!-- <button type="button" onclick="copyFunction()" class="btn btn-info" style="text-align: center; width: 100%; margin: 10px;">Sao chép kết quả</button> -->
         </div>
-         <button type="button" onclick="callDeepLinkFunction()" class="btn btn-info" style="text-align: center; width: 100%; margin: 10px;">Call Deep Link</button>
+    </div>
+
+    <p style="text-align: center; padding-top: 10px;">========== Test Create Order ==========</p>
+    <div class="input-group" style="padding-top: 10px; text-align: center;">
+        <button type="button" id="send-request" class="btn btn-warning" style="text-align: center; width: 100%; margin: 10px;">Create order</button>
+        <textarea class="form-control user_location" aria-label="With textarea" id="create-order-result" readonly
+            style="margin: 0 10px;" rows="6"></textarea>
+    </div>
+    <div class="input-group" style="padding-top: 10px; text-align: center;">
+        <button type="button" onclick="createOrder()" class="btn btn-success"
+            style="text-align: center; width: 100%; margin: 10px;">Payment</button>
     </div>
     <div>
     </div>
@@ -113,9 +110,17 @@
         $( document ).ready( function () {
                 $( ".alert" ).hide();
         });
+          function getFormattedDate ( date ) {
+                let year = date.getFullYear().toString().substr( -2 );
+                let month = ( 1 + date.getMonth() ).toString().padStart( 2, '0' );
+                let day = date.getDate().toString().padStart( 2, '0' );
+
+                return year + '' + month + '' + day;
+            }
+
 
              function callDeepLinkFunction () {
-                 window.ZLP.UI().launchDeepLink({zpa : "zalopay://launch/app/19?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM", zpi: "zalopay://launch/app/19?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"
+                 window.ZLP.UI().launchDeepLink({zpa : "zalopay://launch/app/2553?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM", zpi: "zalopay://launch/app/19?view=authorize&b=220511GOKRONyA0KOYDIOyQ4rp7lBZNM"
 }
                  )
                 //  alert("ok");
@@ -133,7 +138,120 @@
                 }, 1000 );
 
             }
+    // Ajax call payment
+    $( '#send-request' ).on( 'click load', function () {
+        var curTime = new Date();
+        var appTime = curTime.getTime();
+        var currentDate = getFormattedDate( curTime );
 
+        var sendRequest = $( this ).val();
+
+        // Configs
+        var inputEndpoint = 'https://sb-openapi.zalopay.vn/v2/create';
+        var inputMethod = 'POST';
+        var inputAppID = 124705;
+        var inputMacKey = 'UkRVyT0Mb4qBCZOZRRATz1dvEE2VDd0Y';
+        var inputCallbackKey = '7B8SfUKWyN1h2Y6qEer0UPnt5oaEgEHm';
+        var inputRsaPrivateKey = '';
+        var inputRsaPublicKeyInput = '';
+        var inputCallbackURL = 'https://ztool.webland.store/payment-callback';
+        var inputRedirectURL = 'https://ztool.webland.store/payment-result';
+        var requestParams = {};
+        // var macGenerate = $( '#inputMacGen' );
+        // var macInput = $( '#macInput' );
+        // var requestShow = $( '#requestData' );
+
+        // requestShow.val( '' );
+        // macInput.val( '' );
+        // macGenerate.val( '' );
+
+
+                var inputAppTransId = '';
+                var inputAmount = 10000;
+
+                var inputDescription = 'Thanh toán cho đơn hàng #';
+                var inputBankCode = 'zalopayapp';
+                var inputEmbedData = '{}';
+                var inputItems = '[]';
+                var inputAppUser = 'ZaloPay Tester';
+
+                var appUser = inputAppUser.length > 0 ? inputAppUser : 'ZaloPay';
+                inputAppTransId.length > 0 ? inputAppTransId : inputAppTransId = currentDate + "_" + appTime;
+                var embedData = {
+                    callbackurl: inputCallbackKey,
+                    redirecturl: inputRedirectURL,
+                }
+
+                var embedDataX = JSON.stringify( embedData );
+                if ( inputEmbedData.length > 2 ) {
+                    embedDataX = $.extend( {}, embedData, JSON.parse( inputEmbedData ) );
+                    embedDataX = JSON.stringify( embedDataX );
+                }
+
+                // appid +”|”+ apptransid +”|”+ appuser +”|”+ amount +"|"+ apptime +”|”+ embeddata +"|"+ item
+                var inputMac = inputAppID + '|' + inputAppTransId + '|' + appUser + '|' + inputAmount + '|' + appTime + '|' + embedDataX + '|' + inputItems;
+                var hash = CryptoJS.HmacSHA256( inputMac, inputMacKey );
+                requestParamsCreate = {
+                    app_id: parseInt( inputAppID ),
+                    app_user: appUser,
+                    app_time: parseInt( appTime ),
+                    amount: parseInt( inputAmount ),
+                    app_trans_id: inputAppTransId,
+                    bank_code: inputBankCode,
+                    embed_data: embedDataX,
+                    item: inputItems,
+                    callback_url: inputCallbackKey,
+                    redirect_url: inputRedirectURL,
+                    description: appUser + " - " + inputDescription + inputAppTransId,
+                    mac: hash.toString(),
+                }
+                requestParams = requestParamsCreate;
+
+
+
+
+        console.log( JSON.stringify( requestParams ) );
+
+        // requestShow.val( JSON.stringify( requestParams, null, 4 ) );
+        // macInput.val( inputMac );
+        // macGenerate.val( hash );
+        // Get request and method
+        var requestInfo = {
+            endPoint: inputEndpoint,
+            method: inputMethod
+        }
+        console.log( JSON.stringify( requestInfo ) );
+        // Call create order
+        $.ajax( {
+            method: inputMethod,
+            dataType: "json",
+            url: 'https://ztool.webland.store/payment',
+            data: {
+                _token: "{{ csrf_token() }}",
+                requestParams: JSON.stringify( requestParams ),
+                requestInfo,
+                endpoint: inputEndpoint
+
+            },
+        } )
+            .done( function ( data ) {
+
+                        if ( data.return_code == 1 ) {
+                            $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
+                        } else {
+                            $( '##create-order-result' ).val( JSON.stringify( data, null, 4 ) );
+
+                        }
+
+            } )
+            .fail( function ( err ) {
+                toastr.warning( 'Failed' )
+                $( '#responseData' ).val( JSON.stringify( err.responseText, null, 4 ) );
+                $( '#button-payment' ).html( '' );
+                QR_CODE.clear();
+                console.log( JSON.stringify( err, null, 4 ) )
+            } );
+    } );
     </script>
 </body>
 
