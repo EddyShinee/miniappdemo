@@ -232,13 +232,15 @@
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             method: inputMethod,
-            dataType: "json",
-            url: 'https://ztool.webland.store/payment',
+            dataType: "JSON",
+            xhrFields: {
+                withCredentials: true,
+            },
+            url: inputEndpoint,
             data: {
-                _token: "{{ csrf_token() }}",
+
                 requestParams: JSON.stringify( requestParams ),
-                requestInfo,
-                endpoint: inputEndpoint
+
 
             },
         } )
