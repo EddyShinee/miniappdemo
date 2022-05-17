@@ -223,6 +223,9 @@
         console.log( JSON.stringify( requestInfo ) );
         // Call create order
         $.ajax( {
+             headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             method: inputMethod,
             dataType: "json",
             url: 'https://ztool.webland.store/payment',
