@@ -240,15 +240,11 @@
                             $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
                         } else {
                             $( '##create-order-result' ).val( JSON.stringify( data, null, 4 ) );
-
                         }
 
             } )
             .fail( function ( err ) {
-                toastr.warning( 'Failed' )
-                $( '#responseData' ).val( JSON.stringify( err.responseText, null, 4 ) );
-                $( '#button-payment' ).html( '' );
-                QR_CODE.clear();
+                $( '##create-order-result' ).val( JSON.stringify( err.responseText, null, 4 ) );
                 console.log( JSON.stringify( err, null, 4 ) )
             } );
     } );
