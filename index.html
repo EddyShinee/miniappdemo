@@ -66,10 +66,25 @@
         <textarea class="form-control user_location" aria-label="With textarea" id="create-order-result" readonly
             style="margin: 0 10px;" rows="6"></textarea>
     </div>
-    <div class="input-group" style="padding-top: 10px; text-align: center;">
-        <button type="button" onclick="createOrder()" class="btn btn-success"
-            style="text-align: center; width: 100%; margin: 10px;">Payment</button>
+
+
+    <div class="row">
+    <!-- <input class="input-group" style="padding-top: 10px; text-align: center;"> -->
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">ZPToken</span>
+        </div>
+        <input type="text" class="form-control" id="zptoken" aria-label="Default"
+            aria-describedby="inputGroup-sizing-default">
     </div>
+    <button type="button" id="payment" class="btn btn-success"
+        style="text-align: center; width: 100%; margin: 10px;">Payment</button>
+    </div>
+
+    </div>
+
+
+
     <div>
     </div>
     <div style="height: 100px;"></div>
@@ -101,6 +116,13 @@
                  // Your code here
                 document.getElementById( "user_location" ).value = JSON.stringify( e );
             } );
+
+
+            $( '#payment').on('click', () => {
+                window.ZLP.Payment().payOrderV2( $( '#zptoken' ).val() , 'zalopay://launch/app/1721' ).then( payment => {
+                    alert("payment");
+                } );
+            });
 
         }).catch(e => {
             console.log(e);
@@ -224,40 +246,41 @@
         }
         console.log( JSON.stringify( requestInfo ) );
         // Call create order
-        $.ajax( {
-            crossDomain: true,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept',
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            method: inputMethod,
-            dataType: "JSON",
-            xhrFields: {
-                withCredentials: true,
-            },
-            url: inputEndpoint,
-            data: {
+    //     $.ajax( {
+    //         crossDomain: true,
+    //         headers: {
+    //             'Access-Control-Allow-Origin': '*',
+    //             'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept',
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //         },
+    //         method: inputMethod,
+    //         dataType: "JSON",
+    //         xhrFields: {
+    //             withCredentials: true,
+    //         },
+    //         url: 'https://ztool.webland.store/payment',
+    //         data: {
 
-                requestParams: JSON.stringify( requestParams ),
+    //             requestParams: JSON.stringify( requestParams ),
+    //             requestInfo,
+    //             endpoint: inputEndpoint
 
+    //         },
+    //     } )
+    //         .done( function ( data )
 
-            },
-        } )
-            .done( function ( data ) {
+    //                     if ( data.return_code == 1 ) {
+    //                         $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
+    //                     } else {
+    //                         $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
+    //                     }
 
-                        if ( data.return_code == 1 ) {
-                            $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
-                        } else {
-                            $( '#create-order-result' ).val( JSON.stringify( data, null, 4 ) );
-                        }
-
-            } )
-            .fail( function ( err ) {
-                $( '#create-order-result' ).val( JSON.stringify( err.responseText, null, 4 ) );
-                console.log( JSON.stringify( err, null, 4 ) )
-            } );
-    } );
+    //         } )
+    //         .fail( function ( err ) {
+    //             $( '#create-order-result' ).val( JSON.stringify( err.responseText, null, 4 ) );
+    //             console.log( JSON.stringify( err, null, 4 ) )
+    //         } );
+    // } );
     </script>
 </body>
 
