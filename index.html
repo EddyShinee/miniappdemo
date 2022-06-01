@@ -135,19 +135,19 @@
     </script>
     <script>
         $( document ).ready( function () {
-            alert("Load ok");
-                 $( '#payment' ).on( 'click touch', () => {
-                     var zlpToken = $( '#zptoken' ).val();
-                            alert("Load data out " +  zlpToken);
-                             window.ZLP.Payment().payOrderV2( zlpToken, 'zalopay://launch/app/1721' ).then( payment => {
-                                 alert( "payment" );
-                              } ).catch( e => {
-                                 console.log( e );
-                                  alert( "payment: =>" + e );
-                                 document.getElementById( "init_result" ).value = JSON.stringify( e );
-                             }
-                             );
-            } );
+            // alert("Load ok");
+            //      $( '#payment' ).on( 'click touch', () => {
+            //          var zlpToken = $( '#zptoken' ).val();
+            //                 alert("Load data out " +  zlpToken);
+            //                  window.ZLP.Payment().payOrderV2( zlpToken, 'zalopay://launch/app/1721' ).then( payment => {
+            //                      alert( "payment" );
+            //                   } ).catch( e => {
+            //                      console.log( e );
+            //                       alert( "payment: =>" + e );
+            //                      document.getElementById( "init_result" ).value = JSON.stringify( e );
+            //                  }
+            //                  );
+            // } );
 
           function getFormattedDate ( date ) {
                 let year = date.getFullYear().toString().substr( -2 );
