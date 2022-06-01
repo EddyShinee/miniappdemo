@@ -129,8 +129,9 @@
     </script>
     <script>
         $( document ).ready( function () {
-                 $( '#payment' ).on( 'click', () => {
-
+            alert("Load ok");
+                 $( '#payment' ).on( 'click touch', () => {
+                            alert("Load data " + $( '#zptoken' ).val() );
                              window.ZLP.Payment().payOrderV2( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
                                  alert( "payment" );
                              } );
