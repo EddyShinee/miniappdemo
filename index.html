@@ -22,9 +22,6 @@
 </head>
 
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="10">
-    <div class="alert alert-warning" role="alert" style="position: fixed; width: 90%; margin: 20px;" id="copy-result-popup">
-        <p style="text-align: center; font-size: 18px;">Sao chép thành công!</p>
-    </div>
     <header class="text-center text-white bg-primary" style="padding-top: 30px;">
         <div class="container">
             <h2>Merchant Integration</h2>
@@ -132,8 +129,13 @@
     </script>
     <script>
         $( document ).ready( function () {
-                $( ".alert" ).hide();
-        });
+                 $( '#payment' ).on( 'click', () => {
+
+                             window.ZLP.Payment().payOrderV2( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
+                                 alert( "payment" );
+                             } );
+            } );
+
           function getFormattedDate ( date ) {
                 let year = date.getFullYear().toString().substr( -2 );
                 let month = ( 1 + date.getMonth() ).toString().padStart( 2, '0' );
@@ -141,6 +143,7 @@
 
                 return year + '' + month + '' + day;
             }
+        });
 
 
 //              function callDeepLinkFunction () {
