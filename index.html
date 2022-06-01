@@ -139,7 +139,7 @@
                  $( '#payment' ).on( 'click touch', () => {
                      var zlpToken = $( '#zptoken' ).val();
                             alert("Load data " +  zlpToken);
-                             window.ZLP.Payment().payOrder(zlpToken).then( payment => {
+                             window.ZLP.Payment().payOrderV2( zlpToken, 'zalopay://launch/app/1721' ).then( payment => {
                                  alert( "payment" );
                               } ).catch( e => {
                                  console.log( e );
