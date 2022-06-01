@@ -116,7 +116,7 @@
 
               $( '#payment' ).on( 'click touch', () => {
                 alert( "Load data " + $( '#zptoken' ).val() );
-                window.ZLP.Payment().payOrderV2( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
+                window.ZLP.Payment().payOrder( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
                     alert( "payment" );
                 } ).catch( e => {
                     console.log( e );
@@ -137,8 +137,9 @@
         $( document ).ready( function () {
             alert("Load ok");
                  $( '#payment' ).on( 'click touch', () => {
-                            alert("Load data " + $( '#zptoken' ).val() );
-                             window.ZLP.Payment().payOrderV2( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
+                     var zlpToken = $( '#zptoken' ).val();
+                            alert("Load data " +  zlpToken);
+                             window.ZLP.Payment().payOrder(zlpToken).then( payment => {
                                  alert( "payment" );
                               } ).catch( e => {
                                  console.log( e );
