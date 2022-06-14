@@ -116,7 +116,7 @@
 
               $( '#payment' ).on( 'click touch', () => {
                 alert( "Load data " + $( '#zptoken' ).val() );
-                window.ZLP.Payment().payOrder( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
+                window.ZLP.Payment().payOrder( $( '#zptoken' ).val(), 'https://ztool.webland.store/payment-result' ).then( payment => {
                       alert( "payment => " + JSON.stringify( payment ) );
                 } ).catch( e => {
                     console.log( e );
