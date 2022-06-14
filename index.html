@@ -117,11 +117,10 @@
               $( '#payment' ).on( 'click touch', () => {
                 alert( "Load data " + $( '#zptoken' ).val() );
                 window.ZLP.Payment().payOrder( $( '#zptoken' ).val(), 'zalopay://launch/app/1721' ).then( payment => {
-                    alert( "payment" );
+                      alert( "payment => " + JSON.stringify( payment ) );
                 } ).catch( e => {
                     console.log( e );
                     alert( "payment: =>" + e );
-                    document.getElementById( "init_result" ).value = JSON.stringify( e );
                 }
                 );
             } );
@@ -299,5 +298,7 @@
     // } );
     </script>
 </body>
+
+
 
 </html>
