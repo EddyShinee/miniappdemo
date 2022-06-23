@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <!--Begin nhúng SDK của ZaloPay-->
@@ -26,7 +26,8 @@
         <div class="container">
             <h2>Merchant Integration</h2>
             <hr class="star-light">
-            <p class="font-weight-light mb-0" style="font-size: 18px; padding: 20px 0px;">Link SDK của ZaloPay<br>https://scdn.zalopay.com.vn/zst/zpi-spa/sdk/0.1.0/sdk.js<br></p>
+            <p class="font-weight-light mb-0" style="font-size: 18px; padding: 20px 0px;">Link SDK của
+                ZaloPay<br>https://scdn.zalopay.com.vn/zst/zpi-spa/sdk/0.1.0/sdk.js<br></p>
         </div>
         <div class="input-group" style="padding: 20px 0px; text-align: center;">
             <!-- <button type="button" class="btn btn-danger" style="text-align: center; width: 100%; margin: 10px;">Sao chép SDK</button> -->
@@ -44,12 +45,14 @@
 
         <p style="text-align: center; padding-top: 10px;">========== Result ==========</p>
         <div class="input-group">
-            <textarea class="form-control user_result" aria-label="With textarea" id="user_info" readonly style="margin: 0 10px;" rows="6"></textarea>
+            <textarea class="form-control user_result" aria-label="With textarea" id="user_info" readonly
+                style="margin: 0 10px;" rows="6"></textarea>
         </div>
 
         <p style="text-align: center; padding-top: 10px;">========== Get Location (Lt, Lg) ==========</p>
         <div class="input-group">
-            <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly style="margin: 0 10px;" rows="6"></textarea>
+            <textarea class="form-control user_location" aria-label="With textarea" id="user_location" readonly
+                style="margin: 0 10px;" rows="6"></textarea>
         </div>
 
         <div class="input-group" style="padding-top: 10px; text-align: center;">
@@ -59,23 +62,24 @@
 
     <p style="text-align: center; padding-top: 10px;">========== Test Create Order ==========</p>
     <div class="input-group" style="padding-top: 10px; text-align: center;">
-        <button type="button" id="send-request" class="btn btn-warning" style="text-align: center; width: 100%; margin: 10px;">Create order</button>
+        <button type="button" id="send-request" class="btn btn-warning"
+            style="text-align: center; width: 100%; margin: 10px;">Create order</button>
         <textarea class="form-control user_location" aria-label="With textarea" id="create-order-result" readonly
             style="margin: 0 10px;" rows="6"></textarea>
     </div>
 
 
     <div class="row">
-    <!-- <input class="input-group" style="padding-top: 10px; text-align: center;"> -->
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">ZPToken</span>
+        <!-- <input class="input-group" style="padding-top: 10px; text-align: center;"> -->
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">ZPToken</span>
+            </div>
+            <input type="text" class="form-control" id="zptoken" aria-label="Default"
+                aria-describedby="inputGroup-sizing-default">
         </div>
-        <input type="text" class="form-control" id="zptoken" aria-label="Default"
-            aria-describedby="inputGroup-sizing-default">
-    </div>
-    <button type="button" id="payment" class="btn btn-success"
-        style="text-align: center; width: 100%; margin: 10px;">Payment</button>
+        <button type="button" id="payment" class="btn btn-success"
+            style="text-align: center; width: 100%; margin: 10px;">Payment</button>
     </div>
 
     </div>
@@ -91,33 +95,34 @@
     <script src="assets/js/freelancer.js"></script>
     <script>
         // document.getElementById( "user_result" ).value = "Dữ liệu không có!"
-        window.ZLP.init(1721, "sandboxmc").then(result => {
-            console.log(result);
-                document.getElementById("init_result").value = JSON.stringify(result, null, 4);
+        window.ZLP.init( 1721, "sandboxmc" ).then( result => {
+            console.log( result );
+            document.getElementById( "init_result" ).value = JSON.stringify( result, null, 4 );
 
-                window.ZLP.User().getUserInfo().then( data => {
+            window.ZLP.User().getUserInfo().then( data => {
                 console.log( data );
                 document.getElementById( "user_info" ).value = JSON.stringify( data, null, 4 );
 
             } ).catch( e => {
                 console.log( e )
-                document.getElementById( "user_info" ).value = JSON.stringify( e , null, 4);
+                document.getElementById( "user_info" ).value = JSON.stringify( e, null, 4 );
             } );
 
 
             window.ZLP.Device().getCurLocation().then( location => {
                 // Your code here
                 document.getElementById( "user_location" ).value = JSON.stringify( location );
-            }).catch( e => {
+            } ).catch( e => {
                 console.log( e )
-                 // Your code here
+                // Your code here
                 document.getElementById( "user_location" ).value = JSON.stringify( e );
             } );
 
-              $( '#payment' ).on( 'click touch', () => {
+            $( '#payment' ).on( 'click touch', () => {
                 alert( "Load data " + $( '#zptoken' ).val() );
-                window.ZLP.Payment().payOrder( $( '#zptoken' ).val(), 'https://ztool.webland.store/payment-result' ).then( payment => {
-                      alert( "payment => " + JSON.stringify( payment ) );
+                window.ZLP.Payment().payOrder( $( '#zptoken' ).val()).then( payment => {
+                    // Cod
+                    alert( "payment => " + JSON.stringify( payment ) );
                 } ).catch( e => {
                     console.log( e );
                     alert( "payment: =>" + e );
@@ -126,9 +131,9 @@
             } );
 
 
-        }).catch(e => {
-            console.log(e);
-            document.getElementById("init_result").value = JSON.stringify(e);
+        } ).catch( e => {
+            console.log( e );
+            document.getElementById( "init_result" ).value = JSON.stringify( e );
         }
         )
     </script>
@@ -148,14 +153,14 @@
             //                  );
             // } );
 
-          function getFormattedDate ( date ) {
+            function getFormattedDate ( date ) {
                 let year = date.getFullYear().toString().substr( -2 );
                 let month = ( 1 + date.getMonth() ).toString().padStart( 2, '0' );
                 let day = date.getDate().toString().padStart( 2, '0' );
 
                 return year + '' + month + '' + day;
             }
-        });
+        } );
 
 
 //              function callDeepLinkFunction () {
